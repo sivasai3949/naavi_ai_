@@ -6,11 +6,6 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
-secret_key = os.getenv("SECRET_KEY")
-
-if secret_key is None:
-    st.error("Secret key is not available. Please make sure it is set in your environment.")
-    st.stop()
 
 # Initial questions
 questions = [
@@ -62,7 +57,8 @@ def main():
                 st.write(questions[st.session_state.question_index])
             else:
                 st.write("Choose an option:")
-                st.write(options)
+                for option in options:
+                    st.write(option)
     else:
         user_input = st.text_input("User Input")
         if st.button("Send"):
